@@ -72,8 +72,10 @@ Docker是一个开源的引擎，可以轻松的为`任何应用`创建一个轻
 	`docker run -i -t f753707788c5 /bin/bash`
 
 	![](img/3.jpg)
+	
+	这里参数说明一下，`-t` 标示在心容器内指定一个伪终端或终端，`-i` 标示允许我们对容器内的STDIN进行交互。
 
-	这里参数说明一下，-i -t直接得到一个交互shell；
+	`-it`直接得到一个交互shell；
 
 	f753707788c5是镜像的IMAGE ID；
 
@@ -112,13 +114,15 @@ Docker是一个开源的引擎，可以轻松的为`任何应用`创建一个轻
 
 	`docker restart <container id>` 重启该容器；
 
+	`docker rm NAMES` 快速删除该容器；
+
 	`<container id>`通过`docker ps` 来查看；
 
 p.s.镜像，容器，分清楚~
 
 ----------
 
-不是说还可以导入外部镜像文件么，看下面操作：
+###不是说还可以`导入`外部镜像文件么，看下面操作：
 
 ####load：
 假如我们需要从外部拿到了一个ubuntu镜像文件，或者说我们直接拿上面生成的文件直接来用；这里需要注意镜像文件后缀有规定，.tar,.gz等等吧，具体百度。
@@ -132,12 +136,37 @@ p.s.镜像，容器，分清楚~
 1. `cat ubuntu.tar | docker import - ubuntu:2016.10.27`
 2. 这里直接就设置了，查看 `docker images` 会发现已经导入镜像文件；
 
+###还有`导出`呢？
+
+####save：
+1. `docker save <IMAGE ID> > xxx.tar`
+
+####export：
+1. `docker export <CONTAINER ID> > xxx.tar`
+
+####镜像和容器 导出和导入的区别：
+1. 镜像导入和容器导入的区别：
+	- 容器导入 是将当前容器 变成一个新的镜像
+	- 镜像导入 是复制的过程
+2. save 和 export区别：
+	- save 保存镜像所有的信息-包含历史
+	- export 只导出当前的信息
+3. 参考博文：[http://www.jianshu.com/p/8408e06b7273](http://www.jianshu.com/p/8408e06b7273)
+
+----------
+
 ###之后呢？
 1. 有了镜像不和上面步骤一样了，由镜像创建容器等等；
 2. 这里需要注意的是`docker run` 的参数，如果是后台运行，则使用`-d` 参数，进入容器后，需要调出shell界面，则执行`docker exec -i -t <container id> /bin/bash`；
 3. 如果服务需要外网访问，这里需要做端口转发，`docker run -p 80:80 <IMAGE ID>`，即`-p`参数指定端口；
-4. 如果想删除镜像或者容器呢？`docker rmi <image id>`删除镜像，使用`docker rmi <container id>` 删除容器；
+4. 如果想删除镜像或者容器呢？`docker rmi <image id>`删除镜像；使用`docker ps -a` 先查看当前运行容器状态， `docker rm <container id>` 删除容器；
 
+###假如我想迁移一个容器呢？
+1. 查看当前运行容器状态 `docker ps -a`，想导出test11这个容器；
+2. 关闭容器并导出 `docker stop test11`；`docker export test11>test11.tar`
+3. 导入`cat test11.tar | docker import - test11:1.0`，查看镜像文件`docker images`；
+4. 创建新容器`docker run xxx`
+5. 完成`docker ps -a`，发现test12创建成功；
 ### Windows下的Kitematic呢？
 
 这是个GUI的界面化操作，缕过上面的过程后，这个几乎用不到，而且这个端口转发还有问题；
@@ -154,6 +183,8 @@ p.s.镜像，容器，分清楚~
 
 还有一些命令，网上都有，直接百度吧。
 
+###碰到的问题：
+1. 在Linux `Ubuntu15.04` 下运行docker报错：`Cannot connect to the Docker daemon. Is the docker daemon running on this host?`，查看docker服务确实开启，但仍然不行，这时候需要将自己提到root权限 `su -`，并赋予认证 `用户密码` 即可使用；
 ###参考：
 
 https://www.t00ls.net/thread-36440-1-1.html
@@ -163,3 +194,7 @@ https://www.t00ls.net/thread-36468-1-1.html
 https://www.t00ls.net/thread-36467-1-1.html
 
 http://numbbbbb.com/2016/09/26/20160926_用 Docker 快速配置前端开发环境
+
+http://www.jianshu.com/p/8408e06b7273
+
+http://www.heblug.org/chinese_docker
