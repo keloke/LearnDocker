@@ -127,14 +127,17 @@ p.s.镜像，容器，分清楚~
 ####load：
 假如我们需要从外部拿到了一个ubuntu镜像文件，或者说我们直接拿上面生成的文件直接来用；这里需要注意镜像文件后缀有规定，.tar,.gz等等吧，具体百度。
 
-1. `docker load -i ubuntu.tar`
+1. `docker load -i ubuntu.tar` or `docker load < ubuntu.tar` ；
 2. 通过`docker images` 查看是否成功导入镜像；
 3. 由于这里没有设置名字和TAG，显示为`<none> <none>`，利用`docker tag <IMAGE ID> 名字:TAG` 来设置；
 4. 再次输入 `docker images` 会发现已经更改；
 
+	![](img/8.jpg)
+
 ####import：
 1. `cat ubuntu.tar | docker import - ubuntu:2016.10.27`
 2. 这里直接就设置了，查看 `docker images` 会发现已经导入镜像文件；
+3. 如果直接`docker import ubuntu.tar`，则需要在导入成功后设置tag，同load；
 
 ###还有`导出`呢？
 
