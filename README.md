@@ -195,16 +195,17 @@ p.s.镜像，容器，分清楚~
 
 ###碰到的问题：
 1. 在Linux `Ubuntu15.04` 下运行docker报错：`Cannot connect to the Docker daemon. Is the docker daemon running on this host?`，查看docker服务确实开启，但仍然不行，这时候需要将自己提到root权限 `su -`，并赋予认证 `用户密码` 即可使用；
-###参考：
 
-https://www.t00ls.net/thread-36440-1-1.html
+###参考博文：
 
-https://www.t00ls.net/thread-36468-1-1.html
+- https://www.t00ls.net/thread-36440-1-1.html
 
-https://www.t00ls.net/thread-36467-1-1.html
+- https://www.t00ls.net/thread-36468-1-1.html
 
-http://numbbbbb.com/2016/09/26/20160926_用 Docker 快速配置前端开发环境
+- https://www.t00ls.net/thread-36467-1-1.html
 
-http://www.jianshu.com/p/8408e06b7273
+- http://numbbbbb.com/2016/09/26/20160926_用 Docker 快速配置前端开发环境
 
-http://www.heblug.org/chinese_docker
+- http://www.jianshu.com/p/8408e06b7273
+
+- http://www.heblug.org/chinese_docker
