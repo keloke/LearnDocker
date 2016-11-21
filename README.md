@@ -35,7 +35,6 @@ Docker是一个开源的引擎，可以轻松的为`任何应用`创建一个轻
 2. 适用于debian/ubuntu/centos等等；
 
 ###- 如何进行终端操作？
-
 1. Windows下直接点开Docker Quickstart Terminal即可打开终端，界面如下：
 
 	![](img/win.jpg)
@@ -44,11 +43,9 @@ Docker是一个开源的引擎，可以轻松的为`任何应用`创建一个轻
 3. 后面步骤全在win下操作；
 
 ###- 镜像？容器？
-
 我们可以把镜像理解为虚拟机的iso，容器是镜像的实例，先声明（描述）镜像，再创建容器，即同一个镜像容器可以有多个。
 
 ###- 准备开车 ( ゜- ゜)つロ 乾杯~
-
 `场景`：假如你需要一台ubuntu系统的docker，在上面配置Web服务，使用Apache2+PHP+MySQL，如何配置如何运行如何打包如何停止...
 
 `大体步骤`：pull（load/import）-run（exec）-commit-stop（restart）
@@ -177,8 +174,8 @@ p.s.镜像，容器，分清楚~
 3. 导入`cat test11.tar | docker import - test11:1.0`，查看镜像文件`docker images`；
 4. 创建新容器`docker run xxx`
 5. 完成`docker ps -a`，发现test12创建成功；
-### Windows下的Kitematic呢？
 
+### Windows下的Kitematic呢？
 这是个GUI的界面化操作，缕过上面的过程后，这个几乎用不到，而且这个端口转发还有问题；
 
 具体作用位置见下图：
@@ -195,9 +192,12 @@ p.s.镜像，容器，分清楚~
 
 ###碰到的问题：
 1. 在Linux `Ubuntu15.04` 下运行docker报错：`Cannot connect to the Docker daemon. Is the docker daemon running on this host?`，查看docker服务确实开启，但仍然不行，这时候需要将自己提到root权限 `su -`，并赋予认证 `用户密码` 即可使用；
+2. 如果在Windows平台下使用docker，-p转发端口在Kitematic直接不行，而在命令行里有时候也不行。解决方法：打开Oracle VM VirtualBox设置转发端口；
+	- 打开Oracle VM VirtualBox；
+	- 设置 -- 网络 -- 高级 -- 端口转发；
 
+	![](img/11.jpg)
 ###参考博文：
-
 - https://www.t00ls.net/thread-36440-1-1.html
 
 - https://www.t00ls.net/thread-36468-1-1.html
